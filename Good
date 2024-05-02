@@ -1,0 +1,115 @@
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/kpLzpNXc"))()
+local Window = Library:CreateWindow("Moonbeuti.cc", Vector2.new(250, 400), Enum.KeyCode.RightShift)
+local AimingTab = Window:CreateTab("Main")
+
+-- Load the aimbot script
+loadstring(game:HttpGet("https://github.com/Totocoems/Djdodjf/raw/main/Skdkels"))()
+
+—tool
+getgenv().keytoclick = "C"
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = keytoclick
+tool.Activated:connect(function()
+    local vim = game:service("VirtualInputManager")
+vim:SendKeyEvent(true, keytoclick, false, game)
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
+wait(0.2)
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))();
+local Notify = AkaliNotif.Notify;
+Notify({
+Description = "/Moonbeuti.cc";
+Title = "thanks for buying Moonbeuti.cc";
+Duration = 10;
+})
+
+-- Settings table
+local Settings = {
+    rewrittenmain = {
+        Enabled = true,
+        Key = "c",
+        DOT = true,
+        AIRSHOT = true,
+        NOTIF = true, 
+        AUTOPRED = true, 
+        FOV = math.huge,
+        RESOLVER = false 
+    },
+    orbit = {
+        Enabled = false,
+        Distance = 10,
+        Height = 5,
+        Speed = 1
+    }
+}
+
+-- Orbit section
+local orbitSection = AimingTab:CreateSector("Orbit", "top")
+
+orbitSection:AddToggle(
+    "Enabled",
+    false,
+    function(enabled)
+        Settings.orbit.Enabled = enabled
+    end
+)
+
+orbitSection:AddTextbox(
+    "Distance",
+    "10",
+    function(value)
+        Settings.orbit.Distance = tonumber(value) or 10
+    end
+)
+
+orbitSection:AddTextbox(
+    "Height",
+    "5",
+    function(value)
+        Settings.orbit.Height = tonumber(value) or 5
+    end
+)
+
+orbitSection:AddTextbox(
+    "Speed",
+    "1",
+    function(value)
+        Settings.orbit.Speed = tonumber(value) or 1
+    end
+)
+
+-- Other settings (you can add more sections or controls here)
+local testSection = AimingTab:CreateSector("Other", "top")
+
+testSection:AddToggle(
+    "Enabled",
+    false,
+    function(first)
+        Settings.rewrittenmain.TargetStrafe = first
+    end
+)
+
+testSection:AddTextbox(
+    "Distance",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeRadius = State
+    end
+)
+
+testSection:AddTextbox(
+    "Height",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeHeight = State
+    end
+)
+
+testSection:AddTextbox(
+    "Speed",
+    nil,
+    function(State)
+        Settings.rewrittenmain.StrafeSpeed = State
+    end
+)
